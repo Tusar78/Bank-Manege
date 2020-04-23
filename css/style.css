@@ -1,0 +1,16 @@
+#LogArea {
+  background: url(../assets/images/background.jpg) no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transition: 1s ease; }
+
+#bankStatus {
+  display: none; }
+
+.status {
+  margin-bottom: 30px;
+  padding: 25px 35px;
+  color: #fff;
+  border-radius: 15px; }
+
+/*# sourceMappingURL=style.css.map */

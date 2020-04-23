@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design for Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="assets/css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- login  -->
+
+    <div class="container my-5 px-0 z-depth-1" id="LogArea">
+        <!--Section: Content-->
+        <section class="p-5 my-md-5 text-center">
+            <form class="my-5 mx-md-5" action="">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <!-- Material form login -->
+                        <div class="card">
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!-- Form -->
+                                <form class="text-center" style="color: #757575;" action="#!">
+                                    <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Log In</h3>
+                                    <!-- Name -->
+                                    <input type="email" id="defaultSubscriptionFormPassword" class="form-control mb-4"
+                                        placeholder="Email">
+                                    <!-- Email -->
+                                    <input type="password" id="defaultSubscriptionFormEmail" class="form-control"
+                                        placeholder="Password">
+                                    <small id="passwordHelpBlock" class="form-text text-right blue-text">
+                                        <a href="">Recover Password</a>
+                                    </small>
+                                    <div class="text-center">
+                                        <button id="loginBtn" type="button"class="btn btn-success btn-rounded my-4 waves-effect">LogIn</button>
+                                    </div>
+                                </form>
+                                <!-- Form -->
+                            </div>
+                        </div>
+                        <!-- Material form login -->
+                    </div>
+                </div>
+            </form>
+        </section>
+        <!--Section: Content-->
+    </div>
+
+    <div class="container my-5" id="bankStatus">
+        <h2 class="text-center text-primary mb-5">Account Dashboard</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="aqua-gradient z-depth-1 status">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="curDepo">0</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rainy-ashville-gradient z-depth-1 status">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="curwith">0</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="purple-gradient z-depth-1 status">
+                    <h5>Balance</h5>
+                    <h2>$<span id="curBal">100</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit-form">
+                    <input id="depoAmo" type="text" class="form-control mb-2" placeholder="$ Amount you want to deposit">
+                    <button id="depoBtn" class="btn aqua-gradient btn-block text-right">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw-form">
+                    <input id="withAmo" type="text" class="form-control mb-2"placeholder="$ Amount you want to Withdraw">
+                    <button id="withBtn" class="btn text-white rainy-ashville-gradient btn-block text-right">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="assets/js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript">
+        // Login Handle
+        const logIn = document.getElementById('loginBtn');
+        logIn.addEventListener('click', function() {
+            const logArea = document.getElementById('LogArea');
+            logArea.style.display = 'none';
+            const bankStatus = document.getElementById('bankStatus');
+            bankStatus.style.display = 'block'
+        })
+
+        // Deposit Handle
+        const depoBtn = document.getElementById('depoBtn');
+        depoBtn.addEventListener('click', function() {
+
+            const depoAmo = document.getElementById('depoAmo').value;   
+            let depositNum = parseFloat(depoAmo);  
+            updateAmount('curDepo', depositNum, depoAmo);
+            updateAmount('curBal', depositNum, depoAmo);
+            document.getElementById('depoAmo').value = "";
+
+        })
+
+        // Withdraw Handle
+        const withBtn = document.getElementById('withBtn');
+        withBtn.addEventListener('click', () => {
+            const withdrawAmount = document.getElementById('withAmo').value;
+            let withDrawNum = parseFloat(withdrawAmount);
+            updateAmount('curwith', withDrawNum, withdrawAmount);
+            updateAmount('curBal', -1 * withDrawNum, withdrawAmount);
+            document.getElementById('withAmo').value = "";
+        })  
+
+        //Balance Control Function
+        function updateAmount(id, depoValue, rowValue) {
+            const curAmmount = document.getElementById(id).innerText;
+            let ammountNum = parseFloat(curAmmount);
+            let total = ammountNum + depoValue;
+
+            if(rowValue == "") {
+                document.getElementById(id).innerText = ammountNum + 0;
+            } else {
+                document.getElementById(id).innerText = total;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
